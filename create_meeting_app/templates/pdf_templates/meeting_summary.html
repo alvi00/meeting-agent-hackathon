@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Meeting Summary: {{ meeting.name }}</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Meeting Summary: {{ meeting.name }}</h1>
+        <p class="metadata">
+            <strong>Meeting ID:</strong> {{ meeting.id }} • 
+            <strong>Date:</strong> {{ created_date }} • 
+            <strong>Bot:</strong> {{ meeting.bot_name }}
+        </p>
+    </div>
+
+    {% if summary_data.topics %}
+        <h2>📝 Topics Discussed</h2>
+        <ul>
+            {% for topic in summary_data.topics %}
+                <li>{{ topic }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if summary_data.decisions %}
+        <h2>✅ Decisions Made</h2>
+        <ul>
+            {% for decision in summary_data.decisions %}
+                <li>{{ decision }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if summary_data.actions %}
+        <h2>📌 Action Items</h2>
+        <ul>
+            {% for action in summary_data.actions %}
+                <li>{{ action }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if summary_data.deadlines %}
+        <h2>⏳ Deadlines / Next Steps</h2>
+        <ul>
+            {% for deadline in summary_data.deadlines %}
+                <li>{{ deadline }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if summary_data.overall %}
+        <h2>🧠 Overall Summary</h2>
+        <p>{{ summary_data.overall }}</p>
+    {% endif %}
+
+    {% if pdf_data %}
+        <h2>Key Points with Screenshots</h2>
+        {% for item in pdf_data %}
+            <div class="point">
+                <p><strong>{{ item.section }}:</strong> {{ item.point }}</p>
+                {% if item.screenshot %}
+                    <img src="{{ item.screenshot }}" alt="Screenshot for {{ item.point|truncatechars:30 }}">
+                {% else %}
+                    <p class="no-screenshot">No screenshot available for this point.</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>

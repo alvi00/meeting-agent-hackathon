@@ -1,0 +1,13 @@
+{% extends "login_signup_app/base.html" %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+  <div class="profile-container">
+    <h2>Hello, {{ user.email }}!</h2>
+    <p>Authenticated via {{ user.socialaccount_set.first.provider|default:"email/password" }}</p>
+    <a href="{% url 'dashboard' %}" class="btn btn-primary">Dashboard</a>
+    <a href="{% url 'account_logout' %}" class="btn btn-outline">Logout</a>
+  </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+/* meeting_detail.css */
+
+.meeting-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Left side: transcript box */
+.transcript-container {
+  flex: 1 1 300px;
+}
+
+/* Right side: slides container */
+.slides-container {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+/* Each slide image */
+.slides-container img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Transcript box styling */
+.transcript-box {
+  background-color: #fafafa;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 8px;
+  max-height: 75vh;
+  overflow-y: auto;
+  line-height: 1.5;
+}
+
+/* Generate Transcript button */
+.transcribe-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: #2563eb;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s ease-in-out;
+}
+.transcribe-btn:hover {
+  background-color: #1e40af;
+}
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 768px) {
+  .meeting-grid {
+    flex-direction: column;
+  }
+}

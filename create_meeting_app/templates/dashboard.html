@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+{% block title %}Meeting Hub{% endblock %}
+
+{% block content %}
+<div class="container">
+  <!-- Header -->
+  <div class="header">
+    <div class="header-content">
+      <h1>Meeting Hub</h1>
+      <a href="{% url 'profile' %}" class="btn btn-secondary">Go to Profile</a>
+      <p class="subtitle">Organize and manage your meetings efficiently</p>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  {% if messages %}
+    {% for message in messages %}
+      <div class="message {{ message.tags }}">
+        <i class="message-icon"></i>
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Search Bar -->
+  <div class="search-section">
+    <div class="search-container">
+      <i class="search-icon">🔍</i>
+      <input type="text" id="searchInput" placeholder="Search meetings by name or bot..." oninput="searchMeetings()">
+    </div>
+  </div>
+
+  <!-- Meeting Box -->
+  <div class="meeting-section">
+    {% if meetings|length == 0 %}
+      <div class="empty-state">
+        <div class="empty-icon">📅</div>
+        <h3>No meetings yet</h3>
+        <p>Create your first meeting to get started</p>
+        <button class="btn btn-primary" onclick="openCreateModal()">
+          <i class="btn-icon">+</i>
+          Create Meeting
+        </button>
+      </div>
+    {% else %}
+      <div class="meetings-header">
+        <h2>Your Meetings</h2>
+        <button class="btn btn-primary btn-create" onclick="openCreateModal()">
+          <i class="btn-icon">+</i>
+          New Meeting
+        </button>
+      </div>
+      <div class="meeting-grid">
+        {% for m in meetings %}
+          <div class="meeting-card" onclick="handleMeetingClick({{ m.id }}, {% if m.meeting_link and m.join_time %}1{% else %}0{% endif %}, '{{ m.get_absolute_url|escapejs }}')">
+            <div class="card-header">
+              <div class="card-status {% if m.meeting_link and m.join_time %}active{% else %}pending{% endif %}"></div>
+              <button type="button" class="delete-btn" data-meeting-id="{{ m.id }}" data-delete-url="{% url 'delete_meeting' meeting_id=m.id %}">Delete</button>
+            </div>
+            <div class="card-content">
+              <h3>{{ m.name }}</h3>
+              <p class="bot-name">
+                <i class="bot-icon">🤖</i>
+                {{ m.bot_name }}
+              </p>
+              <div class="card-footer">
+                <span class="status-text">
+                  {% if m.meeting_link and m.join_time %}
+                    Ready to join
+                  {% else %}
+                    Setup required
+                  {% endif %}
+                </span>
+                <i class="arrow-icon">→</i>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Create Modal -->
+  <div id="createModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Create New Meeting</h3>
+        <button type="button" class="modal-close" onclick="closeCreateModal()">×</button>
+      </div>
+      <form method="POST" action="{% url 'create_meeting' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="meetingName">Meeting Name</label>
+          <input id="meetingName" name="name" placeholder="Enter meeting name" required />
+        </div>
+        <div class="form-group">
+          <label for="botName">Bot Name</label>
+          <input id="botName" name="bot_name" placeholder="Enter bot name" required />
+        </div>
+        <div class="modal-buttons">
+          <button type="button" class="btn btn-secondary" onclick="closeCreateModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <i class="btn-icon">+</i>
+            Create Meeting
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Join Modal -->
+  <div id="joinModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Setup Meeting</h3>
+        <button type="button" class="modal-close" onclick="closeJoinModal()">×</button>
+      </div>
+      <form method="POST" action="{% url 'join_meeting' %}" onsubmit="closeJoinModal()">
+        {% csrf_token %}
+        <input type="hidden" name="meeting_id" id="meetingIdInput" />
+        <div class="form-group">
+          <label for="meetingLink">Meeting Link</label>
+          <input id="meetingLink" name="meeting_link" placeholder="Paste your meeting link here" required />
+        </div>
+        <div class="form-group">
+          <label for="joinTime">Join Time</label>
+          <input id="joinTime" type="time" name="join_time" required />
+        </div>
+        <div class="modal-buttons">
+          <button type="button" class="btn btn-secondary" onclick="closeJoinModal()">Cancel</button>
+          <button type="submit" class="btn btn-success">
+            <i class="btn-icon">💾</i>
+            Save & Join
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  const createModal = document.getElementById('createModal');
+  const joinModal = document.getElementById('joinModal');
+
+  // Immediately hide modals when script runs
+  createModal.classList.add('hidden');
+  joinModal.classList.add('hidden');
+
+  // Ensure modals are hidden on page load and after navigation
+  document.addEventListener('DOMContentLoaded', () => {
+    createModal.classList.add('hidden');
+    joinModal.classList.add('hidden');
+    console.log('Modals hidden on DOMContentLoaded');
+  });
+
+  window.addEventListener('load', () => {
+    createModal.classList.add('hidden');
+    joinModal.classList.add('hidden');
+    console.log('Modals hidden on window load');
+  });
+
+  // Force reload when page is shown from BFCache
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      console.log('Page loaded from BFCache, reloading...');
+      window.location.reload();
+    }
+  });
+
+  // Modal controls
+  function openCreateModal() {
+    createModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCreateModal() {
+    createModal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+
+  function openJoinModal(id) {
+    if (id && typeof id === 'number') {
+      console.log('openJoinModal called with id:', id);
+      document.getElementById('meetingIdInput').value = id;
+      joinModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeJoinModal() {
+    joinModal.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Handle meeting card click
+  function handleMeetingClick(id, hasDetails, meetingUrl) {
+    if (hasDetails == 1) {
+      console.log('Redirecting to meeting page for id:', id);
+      window.location.href = meetingUrl;
+    } else {
+      openJoinModal(id);
+    }
+  }
+
+  // Close modals on backdrop click or Esc key
+  window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal-backdrop')) {
+      closeCreateModal();
+      closeJoinModal();
+    }
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeCreateModal();
+      closeJoinModal();
+    }
+  });
+
+  // Search meetings
+  function searchMeetings() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.meeting-card');
+    cards.forEach(card => {
+      const name = card.querySelector('h3').textContent.toLowerCase();
+      const bot = card.querySelector('.bot-name').textContent.toLowerCase();
+      card.style.display = (name.includes(input) || bot.includes(input)) ? '' : 'none';
+    });
+  }
+
+  // Delete meeting function
+  function deleteMeeting(meetingId, button) {
+    const csrfToken = getCookie('csrftoken');
+    const deleteUrl = button.dataset.deleteUrl; // Use URL from data-delete-url
+
+    fetch(deleteUrl, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrfToken,
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json()) // Parse JSON response
+    .then(data => {
+      if (data.status === 'success') {
+        // Remove the meeting card from the DOM
+        const card = button.closest('.meeting-card');
+        card.remove();
+        // Optional: Show success message
+        alert('Meeting deleted successfully!');
+      } else {
+        alert('Failed to delete meeting');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred while deleting the meeting');
+    });
+  }
+
+  // CSRF token fetcher
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  // Attach event listeners to delete buttons to stop propagation
+  document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      const meetingId = this.dataset.meetingId;
+      if (!meetingId) return;
+
+      if (confirm('Are you sure you want to delete this meeting?')) {
+        deleteMeeting(meetingId, this);
+      }
+    });
+  });
+</script>
+{% endblock %}

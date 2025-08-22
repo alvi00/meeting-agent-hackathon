@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Workflow - AI Meeting Assistant</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">
+                <i class="fas fa-robot"></i>
+                <span>Meeting_Workflow.ai</span>
+            </a>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                {% comment %} <li><a href="/add-meeting/">Add Meeting</a></li>     {% endcomment %}
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#about">About Us</a></li>    
+                <li><a href="/pricing">Pricing</a></li>      
+                <li><a href="/login/" class="btn-login"> Login/Signup </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+  <section class="home" id="home">
+    <div class="container">
+        <h1 class="main-heading">We are, your AI-Powered Meeting Assistant✨</h1>
+        <p class="subtitle">Join, Transcribe & Summarize Meetings Automatically — Save Time and Stay Organized.</p>
+        <div class="cta-buttons">
+            <a href="/login/" class="btn-primary">Get Started</a>
+            <a href="#features" class="btn-secondary">Learn More</a>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'images/first_animation2.gif' %}" alt="AI Meeting Assistant">
+        </div>
+    </div>
+</section>
+
+<!-- Add meeting section -->
+{% comment %} <section class="add-meeting" id="add-meeting">
+    <div class="container">
+        <h2 class="section-title">Add New Meeting</h2>
+        <div class="add-meeting-box">
+            <a href="/create-meeting/" class="add-meeting-btn">
+                <i class="fas fa-plus"></i>
+                <span>Create New Meeting</span>
+            </a>
+        </div>
+    </div>
+</section> {% endcomment %}
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Auto Meeting Participation</h3>
+                    <p>Bot joins virtual meetings without user intervention</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗣️</div>
+                    <h3>Multilingual Speech-to-Text</h3>
+                    <p>Transcribes both English and Bangla speech</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Smart Summarization</h3>
+                    <p>Converts long meetings into concise, readable summaries</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🖼️</div>
+                    <h3>Auto Screenshot Capture</h3>
+                    <p>Snapshots taken every 30 seconds during meetings</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Scheduled Entry</h3>
+                    <p>Bot joins exactly on the time you schedule</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>All-in-One Dashboard</h3>
+                    <p>View transcript, summary, and screenshots in one place</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Secure and Private</h3>
+                    <p>User data and meeting content are handled with confidentiality</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>User Login & Signup</h3>
+                    <p>Securely create an account and log in to get started.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Create a Meeting</h3>
+                    <p>Click the ➕ icon to add a new meeting with details like meeting name, bot name, link, and time.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>AI Bot Joins the Meeting</h3>
+                    <p>At the scheduled time, our smart bot will automatically join the meeting on your behalf.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>Live Speech Transcription</h3>
+                    <p>Converts all speech into text using our backend language model.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3>Bangla Speech-to-Text</h3>
+                    <p>Unique support for Bangla speech recognition — perfect for local users.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">6</div>
+                    <h3>Smart Summarization</h3>
+                    <p>Transcribed text is cleaned, summarized, and organized for you.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">7</div>
+                    <h3>Automatic Screenshot Capture</h3>
+                    <p>Screenshots taken every 30 seconds during the meeting.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">8</div>
+                    <h3>Everything in One Place</h3>
+                    <p>Complete summary, transcription, and screenshots in your dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">Our Team</h2>
+            <div class="team-slider">
+                <div class="team-member">
+                    <img src="{% static 'images/alvi.jpg' %}" alt="Team Member 1">
+                    <h3>Ahmad Fahmid</h3>
+                    <p>AI Developer</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/shakil.jpg' %}" alt="Team Member 2">
+                    <h3>Shakil Ahmed</h3>
+                    <p>Backend Engineer</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/fahim.jpg' %}" alt="Team Member 3">
+                    <h3>Fahim Foysal</h3>
+                    <p>Frontend Developer</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'images/wasif.jpg' %}" alt="Team Member 4">
+                    <h3>Wasif Haider</h3>
+                    <p>UI/UX Designer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-robot"></i>
+                        <span>Meeting Workflow</span>
+                    </div>
+                    <p>Your AI-powered meeting assistant for smarter workflows</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="/pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> kingfahim214@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +880 1711946008</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Meeting Workflow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    
+</body>
+</html>

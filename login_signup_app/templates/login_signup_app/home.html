@@ -1,0 +1,366 @@
+{% extends "login_signup_app/base.html" %}
+{% load static %}
+{% load socialaccount %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block content %}
+<style>
+  /* Import Inter font */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+  /* Global styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', 'Helvetica Neue', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Center screen container */
+  .center-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  /* Card container */
+  .card-container {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border: 1px solid #f0f0f0;
+  }
+
+  /* Typography */
+  .card-container h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+  }
+
+  .card-container p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 32px;
+    font-weight: 400;
+  }
+
+  /* Button base styles */
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    background-color: #2F80ED;
+    color: #ffffff;
+  }
+
+  .btn-primary:hover {
+    background-color: #1E6FDB;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(47, 128, 237, 0.3);
+  }
+
+  /* Outline button */
+  .btn-outline {
+    background-color: transparent;
+    color: #2F80ED;
+    border: 1px solid #2F80ED;
+  }
+
+  .btn-outline:hover {
+    background-color: #f0f7ff;
+    color: #1E6FDB;
+    border-color: #1E6FDB;
+  }
+
+  /* Divider */
+  .divider {
+    position: relative;
+    margin: 32px 0;
+    text-align: center;
+  }
+
+  .divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+  }
+
+  .divider span {
+    background-color: #ffffff;
+    color: #888;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* Google button specific styling */
+  .btn-google {
+    position: relative;
+    padding-left: 48px;
+  }
+
+  .btn-google::before {
+    content: 'G';
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, #4285f4, #34a853, #fbbc04, #ea4335);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 480px) {
+    .card-container {
+      padding: 32px 24px;
+      margin: 16px;
+      max-width: 90%;
+    }
+
+    .card-container h1 {
+      font-size: 24px;
+    }
+
+    .card-container p {
+      font-size: 15px;
+    }
+
+    .btn {
+      padding: 12px 16px;
+      font-size: 15px;
+    }
+
+    .btn-google {
+      padding-left: 44px;
+    }
+
+    .btn-google::before {
+      left: 14px;
+      font-size: 14px;
+    }
+  }
+
+  /* Focus states for accessibility */
+  .btn:focus {
+    outline: 2px solid #2F80ED;
+    outline-offset: 2px;
+  }
+
+  /* Active states */
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  /* Modern animations */
+  .card-container {
+    animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Staggered content animation */
+  .card-container h1 {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  }
+
+  .card-container p {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  }
+
+  .btn:nth-child(3) {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  }
+
+  .btn:nth-child(4) {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  }
+
+  .divider {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+  }
+
+  .btn-google {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Button hover animations */
+  .btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .btn:hover::before {
+    left: 100%;
+  }
+
+  /* Floating animation for Google G logo */
+  .btn-google::before {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(-50%) rotate(0deg); }
+    50% { transform: translateY(-50%) rotate(5deg); }
+  }
+
+  /* Micro-interactions */
+  .btn {
+    transform: translateY(0);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 8px 25px rgba(47, 128, 237, 0.4);
+  }
+
+  .btn-outline:hover {
+    box-shadow: 0 8px 25px rgba(47, 128, 237, 0.2);
+  }
+
+  .btn:active {
+    transform: translateY(-1px);
+    transition: all 0.1s ease;
+  }
+
+  /* Card hover effect */
+  .card-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* Divider line animation */
+  .divider::before {
+    transform: scaleX(0);
+    animation: expandLine 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;
+  }
+
+  @keyframes expandLine {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* Text shimmer effect on hover */
+  .card-container h1 {
+    background: linear-gradient(45deg, #1a1a1a, #2F80ED, #1a1a1a);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: all 0.3s ease;
+  }
+
+  .card-container:hover h1 {
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* Pulsing effect for focus states */
+  .btn:focus {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(47, 128, 237, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(47, 128, 237, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(47, 128, 237, 0); }
+  }
+</style>
+
+<div class="center-screen">
+  <div class="card-container">
+    <h1>Welcome</h1>
+    <p>Please sign in or create an account:</p>
+    <a href="{% url 'account_login' %}" class="btn btn-primary">Login with Email</a>
+    <a href="{% url 'account_signup' %}" class="btn btn-outline">Sign Up with Email</a>
+
+    <div class="divider"><span>OR</span></div>
+
+    <a href="{% provider_login_url 'google' %}" class="btn btn-outline btn-google">
+      Continue with Google
+    </a>
+  </div>
+</div>
+{% endblock %}

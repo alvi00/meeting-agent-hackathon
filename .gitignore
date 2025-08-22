@@ -1,0 +1,59 @@
+meeting_agent_venv/
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Django
+db.sqlite3
+*.log
+
+# Environment
+.env
+.venv/
+venv/
+env/
+ENV/
+*.env
+
+# VS Code
+.vscode/
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Static and media files
+staticfiles/
+media/
+
+# Test and coverage
+.coverage
+htmlcov/
+*.cover
+*.py,cover
+.cache
+nosetests.xml
+coverage.xml
+*.mo
+*.pot
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# My custom venv
+meeting_agent_venv/
+
+# Ignore screenshots and error images
+*.png
+
+# Ignore logs
+logs/
+cron.log
+meetbot.log
+secrets/json/*.json
+lid.176.bin

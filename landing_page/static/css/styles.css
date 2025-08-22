@@ -1,0 +1,926 @@
+/* Color Theme */
+:root {
+    --navy: #1f1060;         /* Dark Navy */
+    --navy-light: #172a45;   /* Lighter Navy */
+    --navy-dark: #020c1b;    /* Darker Navy */
+    --skyblue: #5045d0;      /* Sky Blue */
+    --white: #FFFFFF;
+    --light-ash: #d5e3f2;    /* Light Ash */
+    --text-dark: #333333;
+    --shadow: 0 4px 20px rgba(10, 25, 47, 0.2);
+    --transition: all 0.3s ease;
+    --gradient: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--light-ash);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 100px 0;
+    position: relative;
+}
+
+/* Section Backgrounds */
+.home::before,
+.features::before,
+.how-it-works::before,
+.about::before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: calc(100% - 100px);
+    background-color: var(--white);
+    border-radius: 30px;
+    z-index: -1;
+    box-shadow: var(--shadow);
+}
+
+/* ====================== */
+/* NAVBAR UNDERLINE EFFECT */
+/* ====================== */
+.nav-links a {
+    position: relative; /* Required for pseudo-element positioning */
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    padding: 8px 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--skyblue);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: var(--white); /* Keep text color white on hover */
+}
+
+/* ====================== */
+/* SECTION TITLE UNDERLINE EFFECT */
+/* ====================== */
+.section-title {
+    position: relative; /* Required for pseudo-element */
+    display: inline-block; /* Make the underline only as wide as the text */
+    font-size: 3rem;
+    color: var(--navy);
+    text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+    transition: var(--transition);
+    padding-bottom: 10px; /* Space for underline */
+    margin-bottom: 30px; /* Additional space below title */
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--skyblue);
+    transition: width 0.5s ease;
+}
+
+.section-title:hover::after {
+    width: 100%;
+}
+
+.section-title:hover {
+    text-shadow: 0 0 15px rgba(100, 255, 218, 0.5);
+}
+
+/* Rest of your existing CSS remains the same */
+.navbar {
+    background-color: var(--navy);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 15px 0;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.logo i {
+    margin-right: 12px;
+    color: var(--skyblue);
+    font-size: 1.5em;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 25px;
+}
+
+/* ====================== */
+/* LOGIN/SIGNUP BUTTON */
+/* ====================== */
+.btn-login {
+    padding: 12px 30px;
+    border-radius: 30px; /* More rounded shape */
+    background: var(--skyblue);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: var(--transition);
+    box-shadow: 0 4px 8px rgba(100, 255, 218, 0.2);
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-left: 20px;
+}
+
+.btn-login:hover {
+    background: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(100, 255, 218, 0.3);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    color: var(--white);
+    cursor: pointer;
+}
+
+/* Home Section */
+.home {
+    text-align: center;
+    padding: 150px 0;
+}
+
+.main-heading {
+    font-size: 4rem;
+    margin-bottom: 25px;
+    color: var(--navy);
+    display: inline-block;
+    transition: var(--transition);
+    position: relative;
+}
+
+.main-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--skyblue);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s ease;
+}
+
+.main-heading:hover {
+    color: var(--navy-dark);
+}
+
+.main-heading:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    display: inline-block;
+}
+
+.subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--skyblue);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s ease;
+}
+
+.subtitle:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.hero-image {
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 5px solid var(--white);
+}
+
+.hero-image img {
+    width: 100%;
+    transition: var(--transition);
+    transform: perspective(1000px) rotateX(5deg);
+}
+
+.hero-image img:hover {
+    transform: perspective(1000px) rotateX(0);
+}
+
+/* Features Section */
+.features {
+    background-color: transparent;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 60px 0;
+}
+
+.feature-card {
+    background-color: var(--white);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+    text-align: center;
+    border: 1px solid rgba(10, 25, 47, 0.1);
+    position: relative;
+    overflow: hidden;
+    transform: scale(1);
+    z-index: 1;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(100, 255, 218, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.feature-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(10, 25, 47, 0.3);
+    color: var(--white);
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.feature-card:hover h3 {
+    color: var(--navy);
+}
+
+.feature-card:hover p {
+    color: var(--text-dark);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 25px;
+    display: inline-block;
+    transition: var(--transition);
+    color: var(--navy);
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.2);
+    color: var(--skyblue);
+}
+
+.feature-card h3 {
+    margin-bottom: 20px;
+    color: var(--navy);
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.feature-card p {
+    color: var(--text-dark);
+    line-height: 1.8;
+    transition: var(--transition);
+}
+
+/* How It Works */
+.how-it-works {
+    background-color: transparent;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin: 60px 0;
+}
+
+.step-card {
+    background-color: var(--white);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(10, 25, 47, 0.1);
+    transform: scale(1);
+    z-index: 1;
+}
+
+.step-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(100, 255, 218, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.step-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(10, 25, 47, 0.3);
+}
+
+.step-card:hover::before {
+    opacity: 1;
+}
+
+.step-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--navy);
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.step-card:hover .step-number {
+    color: var(--skyblue);
+}
+
+.step-card h3 {
+    margin-bottom: 20px;
+    color: var(--navy);
+    font-size: 1.4rem;
+    transition: var(--transition);
+}
+
+.step-card:hover h3 {
+    color: var(--navy-dark);
+}
+
+.step-card p {
+    color: var(--text-dark);
+    line-height: 1.8;
+}
+
+/* About Us */
+.about {
+    background-color: transparent;
+}
+
+.team-slider {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin: 60px 0;
+}
+
+.team-member {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(10, 25, 47, 0.1);
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(10, 25, 47, 0.3);
+}
+
+.team-member img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid var(--white);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    transition: var(--transition);
+}
+
+.team-member:hover img {
+    border-color: var(--skyblue);
+    transform: scale(1.05);
+}
+
+.team-member h3 {
+    margin-bottom: 10px;
+    color: var(--navy);
+    font-size: 1.4rem;
+}
+
+.team-member p {
+    color: var(--navy-light);
+    font-weight: 500;
+}
+
+/* Footer */
+.footer {
+    background: var(--navy);
+    color: var(--white);
+    padding: 80px 0 30px;
+    margin-top: 100px;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 100%;
+    background-color: var(--white);
+    border-radius: 30px 30px 0 0;
+    z-index: -1;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-brand .logo {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.footer-brand p {
+    opacity: 0.8;
+    margin-bottom: 25px;
+    line-height: 1.8;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: rgba(100, 255, 218, 0.1);
+    border-radius: 50%;
+    color: var(--skyblue);
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.social-links a:hover {
+    background: var(--skyblue);
+    color: var(--navy);
+    transform: translateY(-5px);
+}
+
+.footer-links h3, .footer-contact h3 {
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    position: relative;
+    padding-bottom: 10px;
+    color: var(--skyblue);
+}
+
+.footer-links h3::after, .footer-contact h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--skyblue);
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: var(--skyblue);
+    transform: translateX(5px);
+}
+
+.footer-contact p {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.8;
+}
+
+.footer-contact i {
+    color: var(--skyblue);
+    font-size: 1.2rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(100, 255, 218, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .main-heading {
+        font-size: 3.5rem;
+    }
+    
+    .section-title {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-heading {
+        font-size: 3rem;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.3rem;
+    }
+    
+    .btn-login {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: var(--navy);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 50px;
+        transition: var(--transition);
+    }
+    
+    .nav-links.active {
+        left: 0;
+    }
+    
+    .nav-links li {
+        margin: 15px 0;
+    }
+    
+    .main-heading {
+        font-size: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .home::before,
+    .features::before,
+    .how-it-works::before,
+    .about::before {
+        width: 95%;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-heading {
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .feature-card, .step-card, .team-member {
+        padding: 25px;
+    }
+    
+    .hero-image {
+        max-width: 100%;
+    }
+    
+    .btn-login {
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin-left: 10px;
+    }
+}
+/* Add to your CSS */
+/* ====================== */
+/* CTA BUTTONS (GET STARTED & LEARN MORE) */
+/* ====================== */
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.btn-primary {
+    padding: 18px 45px;
+    background: var(--skyblue);
+    color: white;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    transition: var(--transition);
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(80, 69, 208, 0.3);
+    border: 2px solid var(--skyblue);
+}
+
+.btn-primary:hover {
+    background: var(--navy);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(80, 69, 208, 0.4);
+}
+
+.btn-secondary {
+    padding: 18px 45px;
+    background: transparent;
+    color: var(--navy);
+    border: 2px solid var(--navy);
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    transition: var(--transition);
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(10, 25, 47, 0.1);
+}
+
+.btn-secondary:hover {
+    background: var(--navy);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(10, 25, 47, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn-login {
+        padding: 10px 25px;
+        font-size: 1.1rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        padding: 16px 40px;
+        font-size: 1.2rem;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn-login {
+        padding: 8px 20px;
+        font-size: 1rem;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        padding: 14px 30px;
+        font-size: 1.1rem;
+    }
+}
+/* ====================== */
+/* NAVBAR ADD MEETING LINK */
+/* ====================== */
+.nav-add-meeting {
+    background-color: var(--skyblue);
+    color: var(--navy) !important;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-right: 15px;
+    transition: var(--transition);
+}
+
+.nav-add-meeting:hover {
+    background-color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+}
+
+.nav-add-meeting::after {
+    display: none; /* Remove underline effect for this special button */
+}
+
+/* ====================== */
+/* ADD MEETING SECTION */
+/* ====================== */
+.add-meeting {
+    background-color: transparent;
+    text-align: center;
+    padding: 100px 0;
+}
+
+.add-meeting::before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: calc(100% - 100px);
+    background-color: var(--white);
+    border-radius: 30px;
+    z-index: -1;
+    box-shadow: var(--shadow);
+}
+
+.add-meeting-box {
+    max-width: 600px;
+    margin: 60px auto 0;
+}
+
+.add-meeting-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    background-color: var(--white);
+    border: 3px dashed var(--skyblue);
+    border-radius: 20px;
+    color: var(--skyblue);
+    text-decoration: none;
+    transition: var(--transition);
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(80, 69, 208, 0.1);
+}
+
+.add-meeting-btn:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(80, 69, 208, 0.2);
+    border-color: var(--navy);
+    background-color: rgba(80, 69, 208, 0.05);
+}
+
+.add-meeting-btn i {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    transition: var(--transition);
+}
+
+.add-meeting-btn span {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--navy);
+    transition: var(--transition);
+}
+
+.add-meeting-btn:hover i {
+    transform: scale(1.2);
+    color: var(--navy);
+}
+
+.add-meeting-btn:hover span {
+    color: var(--skyblue);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .add-meeting-btn {
+        height: 250px;
+    }
+    
+    .add-meeting-btn i {
+        font-size: 4rem;
+    }
+    
+    .add-meeting-btn span {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .add-meeting-btn {
+        height: 200px;
+        padding: 30px;
+    }
+}

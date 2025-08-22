@@ -1,0 +1,254 @@
+/*==================================================
+  Variables & Resets
+==================================================*/
+:root {
+  --primary:      #1E3A8A;    /* Dark Indigo */
+  --primary-light:#3B82F6;    /* Bright Blue */
+  --bg-light:     #F3F4F6;    /* Light Gray */
+  --bg-white:     #FFFFFF;    /* White */
+  --text-dark:    #1F2937;    /* Dark Gray */
+  --text-muted:   #6B7280;    /* Gray Muted */
+  --accent:       #10B981;    /* Green Accent */
+}
+
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+body {
+  background: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/*==================================================
+  Utility Classes
+==================================================*/
+.container {
+  width: 100%; max-width: 400px;
+  margin: 0 auto; padding: 20px;
+}
+.center-screen {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.card {
+  background: var(--bg-white);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  padding: 30px;
+  width: 100%;
+}
+
+/*==================================================
+  Headings & Text
+==================================================*/
+h1, h2, h3 {
+  color: var(--primary);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+p, label {
+  margin-bottom: 12px;
+  color: var(--text-muted);
+}
+
+/*==================================================
+  Forms & Inputs
+==================================================*/
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  transition: border-color 0.2s;
+}
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+}
+
+/*==================================================
+  Buttons
+==================================================*/
+.btn {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary-light);
+  color: var(--bg-white);
+}
+.btn-primary:hover {
+  background: var(--primary);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary-light);
+}
+.btn-outline:hover {
+  background: var(--primary-light);
+  color: var(--bg-white);
+}
+
+.btn-google {
+  background: var(--bg-white);
+  color: var(--text-dark);
+  border: 1px solid #D1D5DB;
+}
+.btn-google:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+}
+
+/*==================================================
+  Divider
+==================================================*/
+.divider {
+  display: flex; align-items: center;
+  text-align: center; margin: 24px 0;
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: #E5E7EB;
+}
+.divider:not(:empty)::before {
+  margin-right: .75em;
+}
+.divider:not(:empty)::after {
+  margin-left: .75em;
+}
+.divider span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/*==================================================
+  Login / Signup Pages
+==================================================*/
+.your-login-container,
+.signup-container {
+  max-width: 360px;
+  margin: 0 auto;
+}
+.your-login-container form,
+.signup-container form {
+  margin-top: 20px;
+}
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/*==================================================
+  Home (/login/) Page
+==================================================*/
+.home-cta {
+  text-align: center;
+  margin-top: 40px;
+}
+.home-cta .btn {
+  margin: 8px 0;
+  width: 100%;
+}
+
+/*==================================================
+  Profile Page
+==================================================*/
+.profile-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background: var(--bg-white);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+.profile-container .btn + .btn {
+  margin-left: 12px;
+}
+
+/*==================================================
+  Dashboard Page
+==================================================*/
+.dashboard-header {
+  display: flex; justify-content: space-between;
+  align-items: center; margin: 40px auto 20px;
+  max-width: 960px;
+  padding: 0 20px;
+}
+.dashboard-header h1 {
+  font-size: 2rem;
+}
+.dashboard-header .btn-primary {
+  font-size: 1rem;
+}
+
+.meeting-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  max-width: 960px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.meeting-card {
+  background: var(--bg-white);
+  border-radius: 8px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.meeting-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+.meeting-card h3 {
+  margin-bottom: 8px;
+}
+.status-badge {
+  position: absolute;
+  top: 16px; right: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.status-ready {
+  background: var(--accent);
+  color: var(--bg-white);
+}
+.status-pending {
+  background: #FBBF24; /* amber */
+  color: var(--bg-white);
+}
+
+/*==================================================
+  Responsive tweaks
+==================================================*/
+@media(max-width: 600px) {
+  .dashboard-header,
+  .meeting-grid {
+    padding: 0 10px;
+  }
+}

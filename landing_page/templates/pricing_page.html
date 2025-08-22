@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - Meeting Workflow AI</title>    <meta name="description" content="AI-powered meeting transcription and summaries. Start free or upgrade to Pro for advanced features.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+
+    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+          --navy: #1e293b;
+          --white: #fff;
+          --skyblue: #38bdf8;
+          --transition: all 0.3s;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: #2563eb;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #64748b;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            color: #64748b;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .billing-toggle {
+            display: inline-flex;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .toggle-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .toggle-btn.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .trust-signals {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 5rem 0;
+        }
+
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.popular {
+            border-color: #2563eb;
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 30%;
+            transform: translateX(-50%);
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+            100% { transform: translateX(-50%) scale(1); }
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-description {
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .price-container {
+            margin-bottom: 2rem;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .price-currency {
+            font-size: 1.5rem;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        .price-description {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .features li {
+            padding: 0.75rem 0;
+            position: relative;
+            padding-left: 2.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-icon {
+            position: absolute;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 1.25rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: none;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            border: 2px solid transparent;
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+        }
+
+        .cta-secondary {
+            background: white;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+
+        .cta-secondary:hover {
+            background: #2563eb;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .cta-popular {
+            background: white;
+            color: #667eea;
+            border: 2px solid white;
+        }
+
+        .cta-popular:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateY(-3px);
+        }
+
+        /* Comparison Table */
+        .comparison {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .comparison-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .comparison h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .comparison-table th {
+            background: #f8fafc;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .comparison-table .popular-col {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .feature-check {
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .feature-cross {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background: #f8fafc;
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #475569;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .faq h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: #f1f5f9;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 200px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 80px 0 30px;
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: calc(100% + 50px);
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+            border-radius: 30px 30px 0 0;
+            z-index: -1;
+            box-shadow: 0 -20px 60px rgba(100, 255, 218, 0.1);
+        }
+
+        .footer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--skyblue), transparent);
+            z-index: 1;
+        }
+
+        .footer_container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--white);
+        }
+
+        .footer-brand .logo i {
+            color: var(--skyblue);
+            font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .footer-brand p {
+            opacity: 0.8;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(100, 255, 218, 0.1);
+            border-radius: 50%;
+            color: var(--skyblue);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+        }
+
+        .social-links a:hover {
+            background: var(--skyblue);
+            color: var(--navy);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(100, 255, 218, 0.3);
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 15px;
+            color: var(--skyblue);
+            font-weight: 600;
+        }
+
+        .footer-links h3::after, .footer-contact h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--skyblue), transparent);
+            border-radius: 2px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--skyblue);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--skyblue);
+            transform: translateX(8px);
+        }
+
+        .footer-links a:hover::before {
+            width: 100%;
+        }
+
+        .footer-contact p {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0.8;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .footer-contact p:hover {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .footer-contact i {
+            color: var(--skyblue);
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .footer-contact a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-contact a:hover {
+            color: var(--skyblue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            position: relative;
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--skyblue), transparent);
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 768px) {
+            .footer {
+                padding: 60px 0 20px;
+                margin-top: 50px;
+            }
+            
+            .footer::before {
+                width: 95%;
+                border-radius: 20px 20px 0 0;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .footer-brand .logo {
+                justify-content: center;
+                font-size: 1.6rem;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .footer-links h3::after, .footer-contact h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 480px) {
+           
+            
+            .footer {
+                padding: 40px 0 20px;
+                margin-top: 30px;
+            }
+            
+            .footer::before {
+                width: 98%;
+                border-radius: 15px 15px 0 0;
+            }
+            
+            .footer-content {
+                gap: 30px;
+            }
+            
+            .footer-brand .logo {
+                font-size: 1.4rem;
+            }
+            
+            .footer-brand p {
+                font-size: 1rem;
+            }
+            
+            .footer-links h3, .footer-contact h3 {
+                font-size: 1.3rem;
+            }
+            
+            .social-links a {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Scroll animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer-brand, .footer-links, .footer-contact {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .footer-links {
+            animation-delay: 0.2s;
+        }
+
+        .footer-contact {
+            animation-delay: 0.4s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .pricing-card.popular {
+                transform: none;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 1rem;
+            }
+
+            .trust-signals {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 3rem 0;
+            }
+
+            .pricing {
+                padding: 3rem 0;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.8rem;
+            }
+        }
+  </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">Meeting Workflow AI</a>
+            <nav>
+                <ul class="nav">
+                  <li><a href="#pricing">Pricing</a></li>
+                  <li><a href="#comparison">Compare Plans</a></li>
+                  <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="mobile-nav" id="mobileNav">
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero"  id="top">
+        <div class="hero-container">
+            <h1>AI-Powered Meeting Intelligence</h1>
+            <p>Transform your meetings with real-time transcription, smart summaries, and actionable insights.</p>
+            
+            <div class="billing-toggle">
+                <button class="toggle-btn active" data-period="monthly">Monthly</button>
+                <button class="toggle-btn" data-period="yearly">Yearly (Save 20%)</button>
+            </div>
+
+            <div class="trust-signals">
+                <div class="trust-item">
+                    <span>✅</span>
+                    <span>No credit card required</span>
+                </div>
+                <div class="trust-item">
+                    <span>🔐</span>
+                    <span>Bank-level security</span>
+                </div>
+                <div class="trust-item">
+                    <span>⚡</span>
+                    <span>Works with Zoom, Meet, Teams</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="pricing-container">
+            <div class="pricing-grid">
+                <!-- Basic Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Basic</div>
+                    <p class="plan-description">Perfect for individuals and small teams</p>
+                    <div class="price-container">
+                        <div class="price">
+                            <span class="price-currency">$</span>
+                            <span class="price-amount">0</span>
+                        </div>
+                        <div class="price-description">Get started with essential AI transcription</div>
+                    </div>
+                    <ul class="features">
+                        <li><span class="feature-icon">👤</span>1 user included</li>
+                        <li><span class="feature-icon">⏱️</span>30 minutes per meeting</li>
+                        <li><span class="feature-icon">📅</span>3 hours per week limit</li>
+                        <li><span class="feature-icon">📊</span>Summarize 5 meetings/week</li>
+                        <li><span class="feature-icon">🤖</span>Auto meeting participation</li>
+                        <li><span class="feature-icon">🗣️</span>English & Bangla speech-to-text</li>
+                        <li><span class="feature-icon">📄</span>Basic AI summaries</li>
+                        <li><span class="feature-icon">🖼️</span>Auto screenshots (30s intervals)</li>
+                    </ul>
+                    <button class="cta-button cta-secondary">Start for Free</button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="plan-name">Pro</div>
+                    <p class="plan-description">Everything you need for professional meeting intelligence</p>
+                    <div class="price-container">
+                        <div class="price">
+                            <span class="price-currency">$</span>
+                            <span class="price-amount" data-monthly="29" data-yearly="23">29</span>
+                        </div>
+                        <div class="price-description">Advanced AI features for growing teams</div>
+                    </div>
+                    <ul class="features">
+                        <li><span class="feature-icon">👥</span>5 users included</li>
+                        <li><span class="feature-icon">⏱️</span>No meeting time limits</li>
+                        <li><span class="feature-icon">📊</span>Unlimited meeting summaries</li>
+                        <li><span class="feature-icon">🤖</span>Advanced auto participation</li>
+                        <li><span class="feature-icon">🗣️</span>Enhanced multilingual support</li>
+                        <li><span class="feature-icon">📄</span>Smart summarization & cleanup</li>
+                        <li><span class="feature-icon">🖼️</span>HD screenshots & gallery view</li>
+                        <li><span class="feature-icon">📦</span>All-in-one dashboard</li>
+                        <li><span class="feature-icon">🔗</span>Calendar & CRM integrations</li>
+                        <li><span class="feature-icon">📋</span>Export to PDF/Word/Excel</li>
+                    </ul>
+                    <button class="cta-button cta-popular">Get Pro </button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="pricing-card">
+                    <div class="plan-name">Enterprise</div>
+                    <p class="plan-description">Custom solutions for large organizations</p>
+                    <div class="price-container">
+                        <div class="price">
+                            <span style="font-size: 2rem;">Custom</span>
+                        </div>
+                        <div class="price-period">Contact us for pricing</div>
+                        <div class="price-description">Tailored for enterprise-scale deployments</div>
+                    </div>
+                    <ul class="features">
+                        <li><span class="feature-icon">∞</span>Unlimited users & teams</li>
+                        <li><span class="feature-icon">⏱️</span>No limits on meeting duration</li>
+                        <li><span class="feature-icon">📅</span>Custom usage quotas</li>
+                        <li><span class="feature-icon">🎛️</span>Advanced admin controls</li>
+                        <li><span class="feature-icon">🤖</span>Custom bot configurations</li>
+                        <li><span class="feature-icon">🗣️</span>Custom language models</li>
+                        <li><span class="feature-icon">🔐</span>SSO & enterprise security</li>
+                        <li><span class="feature-icon">📊</span>Advanced analytics & reporting</li>
+                        <li><span class="feature-icon">🔄</span>Custom API integrations</li>
+                        <li><span class="feature-icon">📞</span>24/7 priority support</li>
+                        <li><span class="feature-icon">👨‍💼</span>Dedicated success manager</li>
+                    </ul>
+                    <button class="cta-button cta-secondary">Contact Sales Team</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison" id="comparison">
+        <div class="comparison-container">
+            <h2>Compare All Features</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Basic</th>
+                        <th class="popular-col">Pro (Most Popular)</th>
+                        <th>Enterprise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Monthly Price</strong></td>
+                        <td>$0</td>
+                        <td class="popular-col">$29</td>
+                        <td>Contact Us</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Users Included</strong></td>
+                        <td>1</td>
+                        <td class="popular-col">5</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Meeting Duration Limit</strong></td>
+                        <td>30 minutes per meeting</td>
+                        <td class="popular-col">No limits</td>
+                        <td>No limits</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Weekly Hour Limit</strong></td>
+                        <td>3 hours per week</td>
+                        <td class="popular-col">Unlimited</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Meeting Summaries/Week</strong></td>
+                        <td>5 meetings</td>
+                        <td class="popular-col">Unlimited</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Auto Bot Participation</strong></td>
+                        <td><span class="feature-check">✅</span></td>
+                        <td class="popular-col"><span class="feature-check">✅</span></td>
+                        <td><span class="feature-check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bangla Speech Recognition</strong></td>
+                        <td><span class="feature-check">✅</span></td>
+                        <td class="popular-col"><span class="feature-check">✅</span></td>
+                        <td><span class="feature-check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Auto Screenshots</strong></td>
+                        <td><span class="feature-check">✅</span></td>
+                        <td class="popular-col"><span class="feature-check">✅</span></td>
+                        <td><span class="feature-check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Export to PDF/Word</strong></td>
+                        <td><span class="feature-check">✅</span></td>
+                        <td class="popular-col"><span class="feature-check">✅</span></td>
+                        <td><span class="feature-check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Advanced Analytics</strong></td>
+                        <td><span class="feature-cross">❌</span></td>
+                        <td class="popular-col"><span class="feature-check">✅</span></td>
+                        <td><span class="feature-check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Custom Integrations</strong></td>
+                        <td><span class="feature-cross">❌</span></td>
+                        <td class="popular-col">Limited</td>
+                        <td><span class="feature-check">✅</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    "Meeting Workflow helped us save 3 hours a week on meeting notes. The AI summaries are incredibly accurate and the action items feature keeps our team accountable."
+                </div>
+                <div class="testimonial-author">– Sarah Chen, Product Manager at TechCorp</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="faq-container">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    Can I cancel anytime? ▼
+                </button>
+                <div class="faq-answer">
+                    Yes! You can cancel your subscription at any time with no cancellation fees. Your access will continue until the end of your current billing period.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    Is there a student discount? ▼
+                </button>
+                <div class="faq-answer">
+                    Yes, we offer a 50% discount for students and educators. Contact our support team with your .edu email address to apply for the discount.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    How secure is my data? ▼
+                </button>
+                <div class="faq-answer">
+                    Your data is encrypted in transit and at rest using High-level security. We're SOC 2 Type II compliant and never share your meeting content with third parties.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    What platforms do you support? ▼
+                </button>
+                <div class="faq-answer">
+                    Meeting Workflow works with Zoom, Google Meet, Microsoft Teams, and most other popular video conferencing platforms. We also have mobile apps for iOS and Android.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer_container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <i class="fas fa-robot"></i>
+                        <span>Meeting Workflow</span>
+                    </div>
+                    <p>Your AI-powered meeting assistant for smarter workflows</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/mrshakils"><i class="fab fa-github"></i></a>
+                        <a href="https://facebook.com/Shakillinit"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#top">Back to Top 🔝</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#comparison">Compare plans</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 id="contact">Contact Us</h3>
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:work.ahmedshakil@gmail.com">work.ahmedshakil@gmail.com</a>
+                    </p>
+                    <p>
+                        <i class="fas fa-phone"></i>
+                        <a href="tel:+8801644162452">+880 1644-162452</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Meeting Workflow. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('active');
+            });
+        });
+
+        // Pricing toggle functionality
+        const toggleBtns = document.querySelectorAll('.toggle-btn');
+        const priceAmounts = document.querySelectorAll('.price-amount');
+        
+        toggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                toggleBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const period = btn.getAttribute('data-period');
+                
+                priceAmounts.forEach(amount => {
+                    if (amount.hasAttribute('data-monthly') && amount.hasAttribute('data-yearly')) {
+                        const monthlyPrice = amount.getAttribute('data-monthly');
+                        const yearlyPrice = amount.getAttribute('data-yearly');
+                        amount.textContent = period === 'yearly' ? yearlyPrice : monthlyPrice;
+                    }
+                });
+            });
+        });
+
+        // FAQ functionality
+        function toggleFAQ(button) {
+            const answer = button.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            // Close all FAQ answers
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.classList.remove('active');
+            });
+            
+            // Reset all question buttons
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.innerHTML = q.innerHTML.replace('▲', '▼');
+            });
+            
+            // Toggle current answer
+            if (!isActive) {
+                answer.classList.add('active');
+                button.innerHTML = button.innerHTML.replace('▼', '▲');
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
